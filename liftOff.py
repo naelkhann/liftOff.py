@@ -4,32 +4,33 @@
 
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
-import requests, os
+import sys, requests, os, imageio
 
+if len(sys.argv) > 1:
+	i = sys.argv[1]
+else:
+	i = 4027
 
 driver = webdriver.Firefox()
 driver.get("http://interfacelift.com/wallpaper/downloads/date/any")
 assert "InterfaceLIFT" in driver.title, "InterfaceLIFT title doesn't match"
 
 dropdown_click = driver.find_element_by_name('resolution').click()
-resolution = driver.find_element_by_xpath("//select/optgroup[@label='Widescreen 16:10']/option[@id='res_1680x1050_1']").click()
+resolution = driver.find_element_by_xpath("//select/optgroup[@label='Widescreen 16:10']/option[@id='res_1440x900_1']").click()
 
-download = driver.find_element_by_xpath("//div[@id='download_4028']/a")
+item_to_dl = "//div[@id='download_" + str(i) + "']/a"
+download = driver.find_element_by_xpath(item_to_dl)
 
 download.click()
+
 download.click()
-# driver.implicitly_wait(1)
 
-# pull_url = driver.current_url
+pull_url = driver.current_url
+#file_url_from_pull = pull_url[44:]
 
-# pull = requests.get(pull_url)
-
-# imageFile = open(os.path.join('intfl', os.path.basename(pull_url)), 'wb')
-# for each in pull.iter_content(100000):
-# 	imageFile.write(each)
-# imageFile.close()
-
-# driver.close()
+imgg = imageio.imread(pull_url)
+save_imgg = imageio.imwrite('saved.png', imgg)
+driver.close()
 
 
 
