@@ -11,8 +11,6 @@ driver = webdriver.Firefox()
 driver.get("http://interfacelift.com/wallpaper/downloads/date/any")
 assert "InterfaceLIFT" in driver.title, "InterfaceLIFT title doesn't match"
 
-i = 4012
-x = 6
 dropdown_click = driver.find_element_by_name('resolution').click()
 resolution = driver.find_element_by_xpath("//select/optgroup[@label='Widescreen 16:10']/option[@id='res_1680x1050_1']")
 
