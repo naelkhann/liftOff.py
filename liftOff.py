@@ -5,9 +5,10 @@
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from selenium.common.exceptions import NoSuchElementException
-import sys, os, urllib
+import urllib.request
+import sys, os
 
-index_max = input("What is the index number you want to check? [e.g, 4031] : ")
+index_max = int(input("What is the index number you want to check? [e.g, 4031] : "))
 file_check = ""
 index_list = range(4028, index_max+1)
 driver = webdriver.Firefox()
@@ -35,16 +36,16 @@ for index_num in index_list:
 			#file_url_from_pull = pull_url[44:]
 
 			file_name = index_num + ".jpg"
-			urllib.urlretrieve(pull_url, file_name)
-			print "Wallpaper index", index_num, "was successfully downloaded."
+			urllib.request.urlretrieve(pull_url, file_name)
+			print("Wallpaper index", index_num, "was successfully downloaded.")
 
 		except NoSuchElementException:
-			print "Could not find", index_num, "on site. Might be too soon, check back when new file is uploaded"
+			print("Could not find", index_num, "on site. Might be too soon, check back when new file is uploaded")
 			driver.close()
 	else:
-		print file_check, "already exists. Moving to next file."
+		print(file_check, "already exists. Moving to next file.")
 
-print "All operations completed. Check your directory for your InterfaceLift wallpapers!"	
+print("All operations completed. Check your directory for your InterfaceLift wallpapers!")
 
 	
 
